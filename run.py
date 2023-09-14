@@ -44,9 +44,25 @@ def rules(difficulty, grid_size):
     """
     print(rules_variable)
 
+def create_grid(grid_size):
+    return [["." for columns in range(grid_size)] for rows in range(grid_size)]
+
+def print_player_grid(row):
+    """
+    Sets up player's grid and separates the dots with a space
+    """
+    print("Player grid:")
+    for column in row:
+        print(" ".join(column))
+    
+
 def new_game():
     difficulty, grid_size = choose_difficulty()
     rules(difficulty, grid_size)
+    #print(create_grid(grid_size))
+
+    player_grid = create_grid(grid_size)
+    print_player_grid(player_grid)
 
 new_game()
 # Your code goes here.
