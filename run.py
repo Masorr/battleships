@@ -1,3 +1,5 @@
+import random
+
 def choose_difficulty():
     """
     Select between three difficulties:
@@ -47,13 +49,24 @@ def rules(difficulty, grid_size):
 def create_grid(grid_size):
     return [["." for columns in range(grid_size)] for rows in range(grid_size)]
 
-def print_player_grid(row):
+def player_ships(grid):
+    """
+    Sets 5 ships randomly on player's grid
+    Each ship is marked with an 'O'
+    """
+    for _ in range(5):
+        row, col = random.randint(0, 4), random.randint(0, 4)
+        while grid[row][col] == "O":
+            row, col = random.randint(0, 4), random.randint(0, 4)
+        grid[row][col] = "O"
+
+def print_player_grid(grid):
     """
     Sets up player's grid and separates the dots with a space
     """
     print("Player grid:")
-    for column in row:
-        print(" ".join(column))
+    for row in grid:
+        print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
     
 
 def new_game():
@@ -62,6 +75,7 @@ def new_game():
     #print(create_grid(grid_size))
 
     player_grid = create_grid(grid_size)
+    player_ships(player_grid)
     print_player_grid(player_grid)
 
 new_game()
