@@ -60,6 +60,17 @@ def player_ships(grid):
             row, col = random.randint(0, 4), random.randint(0, 4)
         grid[row][col] = "O"
 
+def computer_ships(grid):
+    """
+    Sets 5 ships randomly on computer's grid
+    Each ship is marked with an 'O'
+    """
+    for _ in range(5):
+        row, col = random.randint(0, 4), random.randint(0, 4)
+        while grid[row][col] == "O":
+            row, col = random.randint(0, 4), random.randint(0, 4)
+        grid[row][col] = "O"
+
 def print_player_grid(grid):
     """
     Sets up player's grid and separates the dots with a space
@@ -67,7 +78,14 @@ def print_player_grid(grid):
     print("Player grid:")
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
-    
+
+def print_computer_grid(grid):
+    """
+    Sets up computer's grid and separates the dots with a space
+    """
+    print("Computer grid:")
+    for row in grid:
+        print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
 def new_game():
     difficulty, grid_size = choose_difficulty()
@@ -77,6 +95,10 @@ def new_game():
     player_grid = create_grid(grid_size)
     player_ships(player_grid)
     print_player_grid(player_grid)
+
+    computer_grid = create_grid(grid_size)
+    player_ships(computer_grid)
+    print_computer_grid(computer_grid)
 
 new_game()
 # Your code goes here.
