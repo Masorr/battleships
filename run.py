@@ -87,6 +87,24 @@ def print_computer_grid(grid):
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
+def player_turn(player_grid, computer_grid):
+    """
+    Allows the player to type in a row, then a column
+    Checks if it is a hit or miss on computer's grid
+    Ships marked with 'O' that are hit are marked 'X'
+    Misses are marked with '+'
+    """
+
+    player_guess_row = int(input("Enter row for computer's grid"))
+    player_guess_col = int(input("Enter column for computer's grid"))
+    
+    if computer_grid[player_guess_row][player_guess_col] == "O":
+        print("Player hit computer's ship!")
+        computer_grid[player_guess_row][player_guess_col] = "X"
+    else:
+        print("Player missed!")
+        computer_grid[player_guess_row][player_guess_col] = "+"
+
 def new_game():
     difficulty, grid_size = choose_difficulty()
     rules(difficulty, grid_size)
@@ -99,6 +117,10 @@ def new_game():
     computer_grid = create_grid(grid_size)
     player_ships(computer_grid)
     print_computer_grid(computer_grid)
+
+    player_turn(player_grid, computer_grid)
+
+    print_computer_grid(computer_grid) # updates computer grid after player input
 
 new_game()
 # Your code goes here.
