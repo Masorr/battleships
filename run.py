@@ -115,6 +115,23 @@ def player_turn(player_grid, computer_grid, grid_size):
         print("Player missed!")
         computer_grid[player_guess_row][player_guess_col] = "+"
 
+def computer_turn(player_grid, computer_grid, grid_size):
+    """
+    Allows the computer to select a row, then a column
+    Checks if it is a hit or miss on player's grid
+    Ships marked with 'O' that are hit are marked 'X'
+    Misses are marked with '+'
+    """
+    computer_guess_row = random.randint(0, grid_size - 1)
+    computer_guess_col = random.randint(0, grid_size - 1)
+    
+    if player_grid[computer_guess_row][computer_guess_col] == "O":
+        print("Computer hit player's ship!")
+        player_grid[computer_guess_row][computer_guess_col] = "X"
+    else:
+        print("Computer missed!")
+        player_grid[computer_guess_row][computer_guess_col] = "+"
+
 def valid_coordinate(row, col, grid_size):
     """
     Checks if coordinate is valid on grid
@@ -135,7 +152,9 @@ def new_game():
     print_computer_grid(computer_grid)
 
     player_turn(player_grid, computer_grid, grid_size)
+    computer_turn(player_grid, computer_grid, grid_size)
 
+    print_player_grid(player_grid)
     print_computer_grid(computer_grid) # updates computer grid after player input
 
 new_game()
