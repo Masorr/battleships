@@ -87,16 +87,26 @@ def print_computer_grid(grid):
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
-def player_turn(player_grid, computer_grid):
+def player_turn(player_grid, computer_grid, grid_size):
     """
     Allows the player to type in a row, then a column
     Checks if it is a hit or miss on computer's grid
     Ships marked with 'O' that are hit are marked 'X'
     Misses are marked with '+'
     """
-
-    player_guess_row = int(input("Enter row for computer's grid"))
-    player_guess_col = int(input("Enter column for computer's grid"))
+    while True:
+        player_guess_row = int(input("Enter row for computer's grid: "))
+        if valid_coordinate(player_guess_row, 0, grid_size):
+            break
+        else:
+            print(f"    #Enter valid row number (0 to {grid_size - 1})")
+    
+    while True:
+        player_guess_col = int(input("Enter column for computer's grid: "))
+        if valid_coordinate(player_guess_row, player_guess_col, grid_size):
+            break
+        else:
+            print(f"    #Enter valid column number (0 to {grid_size - 1})")
     
     if computer_grid[player_guess_row][player_guess_col] == "O":
         print("Player hit computer's ship!")
@@ -104,6 +114,12 @@ def player_turn(player_grid, computer_grid):
     else:
         print("Player missed!")
         computer_grid[player_guess_row][player_guess_col] = "+"
+
+def valid_coordinate(row, col, grid_size):
+    """
+    Checks if coordinate is valid on grid
+    """
+    return 0 <= row < grid_size and 0 <= col < grid_size
 
 def new_game():
     difficulty, grid_size = choose_difficulty()
@@ -118,7 +134,7 @@ def new_game():
     player_ships(computer_grid)
     print_computer_grid(computer_grid)
 
-    player_turn(player_grid, computer_grid)
+    player_turn(player_grid, computer_grid, grid_size)
 
     print_computer_grid(computer_grid) # updates computer grid after player input
 
