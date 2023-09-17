@@ -97,16 +97,21 @@ def player_turn(player_grid, computer_grid, grid_size):
     while True:
         player_guess_row = int(input("Enter row for computer's grid: "))
         if valid_coordinate(player_guess_row, 0, grid_size):
-            break
+            pass
         else:
             print(f"    #Enter valid row number (0 to {grid_size - 1})")
-    
-    while True:
-        player_guess_col = int(input("Enter column for computer's grid: "))
-        if valid_coordinate(player_guess_row, player_guess_col, grid_size):
+            continue
+
+        while True:
+            player_guess_col = int(input("Enter column for computer's grid: "))
+            if valid_coordinate(player_guess_row, player_guess_col, grid_size): # if col within grid, break child loop
+                break 
+            else:
+                print(f"    #Enter valid column number (0 to {grid_size - 1})")
+        if computer_grid[player_guess_row][player_guess_col] in ["+", "X"]: # checks if coordinate (row and col) has already been used
+            print(f"    #Enter an unused coordinate (marked as '.')")
+        else: # if coordinate with '.' selected, break parent loop
             break
-        else:
-            print(f"    #Enter valid column number (0 to {grid_size - 1})")
     
     if computer_grid[player_guess_row][player_guess_col] == "O":
         print("Player hit computer's ship!")
@@ -151,11 +156,12 @@ def new_game():
     player_ships(computer_grid)
     print_computer_grid(computer_grid)
 
-    player_turn(player_grid, computer_grid, grid_size)
-    computer_turn(player_grid, computer_grid, grid_size)
+    while True:
+        player_turn(player_grid, computer_grid, grid_size)
+        computer_turn(player_grid, computer_grid, grid_size)
 
-    print_player_grid(player_grid)
-    print_computer_grid(computer_grid) # updates computer grid after player input
+        print_player_grid(player_grid)
+        print_computer_grid(computer_grid) # updates computer grid after player input
 
 new_game()
 # Your code goes here.
