@@ -125,9 +125,11 @@ def player_turn(player_grid, computer_grid, grid_size):
     if computer_grid[player_guess_row][player_guess_col] == "O":
         print("Player hit computer's ship!")
         computer_grid[player_guess_row][player_guess_col] = "X"
+        return True
     else:
         print("Player missed!")
         computer_grid[player_guess_row][player_guess_col] = "+"
+        return False
 
 def computer_turn(player_grid, computer_grid, grid_size):
     """
@@ -147,9 +149,11 @@ def computer_turn(player_grid, computer_grid, grid_size):
     if player_grid[computer_guess_row][computer_guess_col] == "O":
         print("Computer hit player's ship!")
         player_grid[computer_guess_row][computer_guess_col] = "X"
+        return True
     else:
         print("Computer missed!")
         player_grid[computer_guess_row][computer_guess_col] = "+"
+        return False
 
 def valid_coordinate(row, col, grid_size):
     """
@@ -170,12 +174,23 @@ def new_game():
     player_ships(computer_grid, grid_size)
     print_computer_grid(computer_grid)
 
-    while True:
-        player_turn(player_grid, computer_grid, grid_size)
-        computer_turn(player_grid, computer_grid, grid_size)
+    player_ships_remaining = 5
+    computer_ships_remaining = 5
+
+    while player_ships_remaining > 0 and computer_ships_remaining > 0:
+        if player_turn(player_grid, computer_grid, grid_size):
+            computer_ships_remaining -= 1
+
+        if computer_turn(player_grid, computer_grid, grid_size):
+            player_ships_remaining -= 1
 
         print_player_grid(player_grid)
         print_computer_grid(computer_grid) # updates computer grid after player input
+
+    if computer_ships_remaining == 0:
+        print("Player won the game!")
+    else:
+        print("Computer won the game!")
 
 new_game()
 # Your code goes here.
