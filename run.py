@@ -95,19 +95,28 @@ def player_turn(player_grid, computer_grid, grid_size):
     Misses are marked with '+'
     """
     while True:
-        player_guess_row = int(input("Enter row for computer's grid: "))
-        if valid_coordinate(player_guess_row, 0, grid_size):
-            pass
+        player_guess_row = input("Enter row for computer's grid: ")
+        if player_guess_row.isdigit(): # if string is digit, converts to integer
+            player_guess_row = int(player_guess_row)
+            if valid_coordinate(player_guess_row, 0, grid_size):
+                pass
+            else:
+                print(f"    #Enter valid row number (0 to {grid_size - 1})")
+                continue
         else:
-            print(f"    #Enter valid row number (0 to {grid_size - 1})")
+            print(f"    #Enter a valid numeric row.")
             continue
 
         while True:
-            player_guess_col = int(input("Enter column for computer's grid: "))
-            if valid_coordinate(player_guess_row, player_guess_col, grid_size): # if col within grid, break child loop
-                break 
+            player_guess_col = input("Enter column for computer's grid: ")
+            if player_guess_col.isdigit(): # if string is digit, converts to integer
+                player_guess_col = int(player_guess_col)
+                if valid_coordinate(player_guess_row, player_guess_col, grid_size): # if col within grid, break child loop
+                    break 
+                else:
+                    print(f"    #Enter valid column number (0 to {grid_size - 1})")
             else:
-                print(f"    #Enter valid column number (0 to {grid_size - 1})")
+                print(f"    #Enter a valid numeric row.")
         if computer_grid[player_guess_row][player_guess_col] in ["+", "X"]: # checks if coordinate (row and col) has already been used
             print(f"    #Enter an unused coordinate (marked as '.')")
         else: # if coordinate with '.' selected, break parent loop
