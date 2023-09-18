@@ -136,8 +136,13 @@ def computer_turn(player_grid, computer_grid, grid_size):
     Ships marked with 'O' that are hit are marked 'X'
     Misses are marked with '+'
     """
-    computer_guess_row = random.randint(0, grid_size - 1)
-    computer_guess_col = random.randint(0, grid_size - 1)
+    while True:
+        computer_guess_row = random.randint(0, grid_size - 1)
+        computer_guess_col = random.randint(0, grid_size - 1)
+
+        # Validates computer's choice to only target unused coordinates
+        if player_grid[computer_guess_row][computer_guess_col] in [".", "O"]:
+            break
     
     if player_grid[computer_guess_row][computer_guess_col] == "O":
         print("Computer hit player's ship!")
