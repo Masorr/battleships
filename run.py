@@ -49,26 +49,26 @@ def rules(difficulty, grid_size):
 def create_grid(grid_size):
     return [["." for columns in range(grid_size)] for rows in range(grid_size)]
 
-def player_ships(grid):
+def player_ships(grid, grid_size):
     """
     Sets 5 ships randomly on player's grid
     Each ship is marked with an 'O'
     """
     for _ in range(5):
-        row, col = random.randint(0, 4), random.randint(0, 4)
+        row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
         while grid[row][col] == "O":
-            row, col = random.randint(0, 4), random.randint(0, 4)
+            row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
         grid[row][col] = "O"
 
-def computer_ships(grid):
+def computer_ships(grid, grid_size):
     """
     Sets 5 ships randomly on computer's grid
     Each ship is marked with an 'O'
     """
     for _ in range(5):
-        row, col = random.randint(0, 4), random.randint(0, 4)
+        row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
         while grid[row][col] == "O":
-            row, col = random.randint(0, 4), random.randint(0, 4)
+            row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
         grid[row][col] = "O"
 
 def print_player_grid(grid):
@@ -116,7 +116,7 @@ def player_turn(player_grid, computer_grid, grid_size):
                 else:
                     print(f"    #Enter valid column number (0 to {grid_size - 1})")
             else:
-                print(f"    #Enter a valid numeric row.")
+                print(f"    #Enter a valid numeric column.")
         if computer_grid[player_guess_row][player_guess_col] in ["+", "X"]: # checks if coordinate (row and col) has already been used
             print(f"    #Enter an unused coordinate (marked as '.')")
         else: # if coordinate with '.' selected, break parent loop
@@ -158,11 +158,11 @@ def new_game():
     #print(create_grid(grid_size))
 
     player_grid = create_grid(grid_size)
-    player_ships(player_grid)
+    player_ships(player_grid, grid_size)
     print_player_grid(player_grid)
 
     computer_grid = create_grid(grid_size)
-    player_ships(computer_grid)
+    player_ships(computer_grid, grid_size)
     print_computer_grid(computer_grid)
 
     while True:
