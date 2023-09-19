@@ -192,7 +192,21 @@ def new_game():
     else:
         print("Computer won the game!")
 
-new_game()
+while True:
+    new_game()
+
+    while True:
+        restart = input(f"Play again? (yes/no): \n")
+        if restart == "yes":
+            print("Restarting game")
+            continue
+        elif restart == "no":
+            print("Closing game")
+            break
+        else:
+            print("    #Invalid choice")
+    break
+
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
