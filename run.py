@@ -216,12 +216,14 @@ while True:
         restart = input(f"Play again? (yes/no): \n")
         if restart == "yes":
             print("Restarting game")
-            continue
+            break
         elif restart == "no":
             print("Closing game")
             break
         else:
             print("    #Invalid choice")
+    if restart == "yes":
+        continue
     break
 
 # Your code goes here.
