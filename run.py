@@ -56,20 +56,9 @@ def rules(difficulty, grid_size):
 def create_grid(grid_size):
     return [["." for columns in range(grid_size)] for rows in range(grid_size)]
 
-def player_ships(grid, grid_size):
+def ships(grid, grid_size):
     """
-    Sets 5 ships randomly on player's grid
-    Each ship is marked with an 'O'
-    """
-    for _ in range(5):
-        row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
-        while grid[row][col] == "O":
-            row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
-        grid[row][col] = "O"
-
-def computer_ships(grid, grid_size):
-    """
-    Sets 5 ships randomly on computer's grid
+    Sets 5 ships randomly on a grid
     Each ship is marked with an 'O'
     """
     for _ in range(5):
@@ -168,10 +157,10 @@ def new_game():
     rules(difficulty, grid_size)
 
     player_grid = create_grid(grid_size)
-    player_ships(player_grid, grid_size)
+    ships(player_grid, grid_size)
 
     computer_grid = create_grid(grid_size)
-    player_ships(computer_grid, grid_size)
+    ships(computer_grid, grid_size)
 
     player_ships_remaining = 5
     computer_ships_remaining = 5
