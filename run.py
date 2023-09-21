@@ -77,7 +77,7 @@ def print_player_grid(grid):
     """
     Sets up player's grid and separates the dots with a space
     """
-    print(colored("Player grid:", "blue"))
+    #print(colored("Player grid:", "blue"))
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
@@ -85,7 +85,7 @@ def print_computer_grid(grid):
     """
     Sets up computer's grid and separates the dots with a space
     """
-    print(colored("Computer grid:", "red"))
+    #print(colored("Computer grid:", "red"))
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
@@ -170,29 +170,44 @@ def new_game():
 
     player_grid = create_grid(grid_size)
     player_ships(player_grid, grid_size)
-    print_player_grid(player_grid)
+    #print_player_grid(player_grid)
 
     computer_grid = create_grid(grid_size)
     player_ships(computer_grid, grid_size)
-    print_computer_grid(computer_grid)
+    #print_computer_grid(computer_grid)
 
     player_ships_remaining = 5
     computer_ships_remaining = 5
+    player_score = 0
+    computer_score = 0
 
-    while player_ships_remaining > 0 and computer_ships_remaining > 0:
+    while True:
+        print(colored("Player grid: ", "blue") + f"score {player_score}")
+        print_player_grid(player_grid)
+        #print(player_score)
+        print(colored("Computer grid: ", "red") + f"score {computer_score}")
+        print_computer_grid(computer_grid) # updates computer grid after player input
+        #print(computer_score)
+
+        if player_ships_remaining == 0:
+            print(colored("Computer won the game!", "red"))
+            break
+        elif computer_ships_remaining == 0:
+            print(colored("Player won the game!", "blue"))
+            break
+            
         if player_turn(player_grid, computer_grid, grid_size):
             computer_ships_remaining -= 1
+            player_score += 1
 
         if computer_turn(player_grid, computer_grid, grid_size):
             player_ships_remaining -= 1
+            computer_score += 1
 
-        print_player_grid(player_grid)
-        print_computer_grid(computer_grid) # updates computer grid after player input
-
-    if computer_ships_remaining == 0:
-        print("Player won the game!")
-    else:
-        print("Computer won the game!")
+    #if computer_ships_remaining == 0:
+        #print(colored("Player won the game!", "blue"))
+    #else:
+        #print(colored("Computer won the game!", "red"))
 
 while True:
     new_game()
