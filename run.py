@@ -1,6 +1,11 @@
 import random
 from termcolor import colored
 
+def input_username():
+    """
+    Allows the user to insert a username
+    """
+    return input(f"Insert username: \n")
 
 def choose_difficulty():
     """
@@ -87,7 +92,7 @@ def print_computer_grid(grid):
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
-def player_turn(player_grid, computer_grid, grid_size):
+def player_turn(player_grid, computer_grid, grid_size, username):
     """
     Allows the player to type in a row, then a column
     Checks if it is a hit or miss on computer's grid
@@ -123,11 +128,11 @@ def player_turn(player_grid, computer_grid, grid_size):
             break
     
     if computer_grid[player_guess_row][player_guess_col] == "O":
-        print(colored("Player hit computer's ship!", "blue"))
+        print(colored(f"{username} hit computer's ship!", "blue"))
         computer_grid[player_guess_row][player_guess_col] = "X"
         return True
     else:
-        print("Player missed!")
+        print(f"{username} missed!")
         computer_grid[player_guess_row][player_guess_col] = "+"
         return False
 
@@ -162,6 +167,7 @@ def valid_coordinate(row, col, grid_size):
     return 0 <= row < grid_size and 0 <= col < grid_size
 
 def new_game():
+    username = input_username()
     difficulty, grid_size = choose_difficulty()
     rules(difficulty, grid_size)
 
@@ -179,7 +185,7 @@ def new_game():
     computer_score = 0
 
     while True:
-        print(colored("Player grid: ", "blue") + f"score {player_score}")
+        print(colored(f"{username}'s grid: ", "blue") + f"score {player_score}")
         print_player_grid(player_grid)
         print(colored("Computer grid: ", "red") + f"score {computer_score}")
         print_computer_grid(computer_grid) # updates computer grid after player input
@@ -188,10 +194,10 @@ def new_game():
             print(colored("Computer won the game!", "red"))
             break
         elif computer_ships_remaining == 0:
-            print(colored("Player won the game!", "blue"))
+            print(colored(f"{username} won the game!", "blue"))
             break
             
-        if player_turn(player_grid, computer_grid, grid_size):
+        if player_turn(player_grid, computer_grid, grid_size, username):
             computer_ships_remaining -= 1
             player_score += 1
 
