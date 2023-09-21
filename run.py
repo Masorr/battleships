@@ -1,4 +1,6 @@
 import random
+from termcolor import colored
+
 
 def choose_difficulty():
     """
@@ -21,7 +23,7 @@ def choose_difficulty():
             grid_size = 10
             break
         else:
-            print("Invalid difficulty choice")
+            print("    #Invalid difficulty choice")
 
     return difficulty, grid_size
 
@@ -75,7 +77,7 @@ def print_player_grid(grid):
     """
     Sets up player's grid and separates the dots with a space
     """
-    print("Player grid:")
+    print(colored("Player grid:", "blue"))
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
@@ -83,7 +85,7 @@ def print_computer_grid(grid):
     """
     Sets up computer's grid and separates the dots with a space
     """
-    print("Computer grid:")
+    print(colored("Computer grid:", "red"))
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
@@ -95,7 +97,7 @@ def player_turn(player_grid, computer_grid, grid_size):
     Misses are marked with '+'
     """
     while True:
-        player_guess_row = input("Enter row for computer's grid: ")
+        player_guess_row = input(colored("Enter row for computer's grid: ", "yellow"))
         if player_guess_row.isdigit(): # if string is digit, converts to integer
             player_guess_row = int(player_guess_row)
             if valid_coordinate(player_guess_row, 0, grid_size):
@@ -108,7 +110,7 @@ def player_turn(player_grid, computer_grid, grid_size):
             continue
 
         while True:
-            player_guess_col = input("Enter column for computer's grid: ")
+            player_guess_col = input(colored("Enter column for computer's grid: ", "yellow"))
             if player_guess_col.isdigit(): # if string is digit, converts to integer
                 player_guess_col = int(player_guess_col)
                 if valid_coordinate(player_guess_row, player_guess_col, grid_size): # if col within grid, break child loop
@@ -123,7 +125,7 @@ def player_turn(player_grid, computer_grid, grid_size):
             break
     
     if computer_grid[player_guess_row][player_guess_col] == "O":
-        print("Player hit computer's ship!")
+        print(colored("Player hit computer's ship!", "blue"))
         computer_grid[player_guess_row][player_guess_col] = "X"
         return True
     else:
@@ -147,7 +149,7 @@ def computer_turn(player_grid, computer_grid, grid_size):
             break
     
     if player_grid[computer_guess_row][computer_guess_col] == "O":
-        print("Computer hit player's ship!")
+        print(colored("Computer hit player's ship!", "red"))
         player_grid[computer_guess_row][computer_guess_col] = "X"
         return True
     else:
