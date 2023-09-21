@@ -85,12 +85,15 @@ def print_player_grid(grid):
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
-def print_computer_grid(grid):
+def print_computer_grid(grid, hide_ships = False):
     """
     Sets up computer's grid and separates the dots with a space
     """
     for row in grid:
-        print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
+        if hide_ships:
+            print(" ".join(["." if cell == "O" else cell for cell in row])) # list comprehension, iterating through each cell and hides ships marked 'O' with '.'
+        else:
+            print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
 def player_turn(player_grid, computer_grid, grid_size, username):
     """
@@ -188,7 +191,7 @@ def new_game():
         print(colored(f"{username}'s grid: ", "blue") + f"score {player_score}")
         print_player_grid(player_grid)
         print(colored("Computer grid: ", "red") + f"score {computer_score}")
-        print_computer_grid(computer_grid) # updates computer grid after player input
+        print_computer_grid(computer_grid, hide_ships = True) # computer's ships are hidden
 
         if player_ships_remaining == 0:
             print(colored("Computer won the game!", "red"))
