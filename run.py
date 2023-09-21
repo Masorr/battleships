@@ -78,16 +78,9 @@ def computer_ships(grid, grid_size):
             row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
         grid[row][col] = "O"
 
-def print_player_grid(grid):
+def print_grid(grid, hide_ships = False):
     """
-    Sets up player's grid and separates the dots with a space
-    """
-    for row in grid:
-        print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
-
-def print_computer_grid(grid, hide_ships = False):
-    """
-    Sets up computer's grid and separates the dots with a space
+    Sets up a grid and separates the cells with a space
     """
     for row in grid:
         if hide_ships:
@@ -176,11 +169,9 @@ def new_game():
 
     player_grid = create_grid(grid_size)
     player_ships(player_grid, grid_size)
-    #print_player_grid(player_grid)
 
     computer_grid = create_grid(grid_size)
     player_ships(computer_grid, grid_size)
-    #print_computer_grid(computer_grid)
 
     player_ships_remaining = 5
     computer_ships_remaining = 5
@@ -189,9 +180,9 @@ def new_game():
 
     while True:
         print(colored(f"{username}'s grid: ", "blue") + f"score {player_score}")
-        print_player_grid(player_grid)
+        print_grid(player_grid)
         print(colored("Computer grid: ", "red") + f"score {computer_score}")
-        print_computer_grid(computer_grid, hide_ships = True) # computer's ships are hidden
+        print_grid(computer_grid, hide_ships = True) # computer's ships are hidden
 
         if player_ships_remaining == 0:
             print(colored("Computer won the game!", "red"))
