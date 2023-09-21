@@ -77,7 +77,6 @@ def print_player_grid(grid):
     """
     Sets up player's grid and separates the dots with a space
     """
-    #print(colored("Player grid:", "blue"))
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
@@ -85,7 +84,6 @@ def print_computer_grid(grid):
     """
     Sets up computer's grid and separates the dots with a space
     """
-    #print(colored("Computer grid:", "red"))
     for row in grid:
         print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
 
@@ -166,7 +164,6 @@ def valid_coordinate(row, col, grid_size):
 def new_game():
     difficulty, grid_size = choose_difficulty()
     rules(difficulty, grid_size)
-    #print(create_grid(grid_size))
 
     player_grid = create_grid(grid_size)
     player_ships(player_grid, grid_size)
@@ -184,10 +181,8 @@ def new_game():
     while True:
         print(colored("Player grid: ", "blue") + f"score {player_score}")
         print_player_grid(player_grid)
-        #print(player_score)
         print(colored("Computer grid: ", "red") + f"score {computer_score}")
         print_computer_grid(computer_grid) # updates computer grid after player input
-        #print(computer_score)
 
         if player_ships_remaining == 0:
             print(colored("Computer won the game!", "red"))
@@ -203,11 +198,6 @@ def new_game():
         if computer_turn(player_grid, computer_grid, grid_size):
             player_ships_remaining -= 1
             computer_score += 1
-
-    #if computer_ships_remaining == 0:
-        #print(colored("Player won the game!", "blue"))
-    #else:
-        #print(colored("Computer won the game!", "red"))
 
 while True:
     new_game()
