@@ -42,7 +42,7 @@ def rules(difficulty, grid_size):
     """
 
     rules_variable = f"""
-    {'-'*80}
+    {'-'*70}
     #    Welcome to BATTLESHIPS the game!
     #    Difficulty: {difficulty}
     #    Map size: {grid_size} by {grid_size} grid
@@ -54,7 +54,7 @@ def rules(difficulty, grid_size):
 then a column number (0 to {grid_size - 1})
     #    Used coordinates are removed from game!
     #    Good luck!
-    {'-'*80}
+    {'-'*70}
     """
     print(rules_variable)
 
@@ -245,10 +245,10 @@ while True:
     while True:
         restart = input(f"Play again? (yes/no): \n")
         if restart == "yes":
-            print("Restarting game")
+            print("Restarting game...")
             break
         elif restart == "no":
-            print("Closing game")
+            print("Closing game...")
             break
         else:
             print("    #Invalid choice")
