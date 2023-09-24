@@ -1,18 +1,21 @@
 import random
 from termcolor import colored
 
+
 def input_username():
     """
-    Allows the user to insert a username
+    Allows the user to insert a username.
     """
+
     return input(f"Insert username: \n")
+
 
 def choose_difficulty():
     """
     Select between three difficulties:
-    easy: 5 by 5 grid
-    normal: 7 by 7 grid
-    hard: 10 by 10 grid
+    easy: 5 by 5 grid.
+    normal: 7 by 7 grid.
+    hard: 10 by 10 grid.
     """
 
     while True:
@@ -32,6 +35,7 @@ def choose_difficulty():
 
     return difficulty, grid_size
 
+
 def rules(difficulty, grid_size):
     """
     Prints the rules for the chosen difficulty of the game.
@@ -46,47 +50,76 @@ def rules(difficulty, grid_size):
     #    Rules:
     #    Sink the computer's 5 ships before it sinks yours!
     #    You and the computer have each a separate grid with 5 ships
-    #    Select a row number (0 to {grid_size - 1}), then a column number (0 to {grid_size - 1})
+    #    Select a row number (0 to {grid_size - 1}), \
+then a column number (0 to {grid_size - 1})
     #    Used coordinates are removed from game!
     #    Good luck!
     {'-'*80}
     """
     print(rules_variable)
 
+
 def create_grid(grid_size):
+    """
+    Generates an empty grid.
+    Size is based on selected difficulty.
+    """
+
+    # The generated grid comes as a list of lists
     return [["." for columns in range(grid_size)] for rows in range(grid_size)]
+
 
 def ships(grid, grid_size):
     """
-    Sets 5 ships randomly on a grid
-    Each ship is marked with an 'O'
+    Sets 5 ships randomly on a grid.
+    Each ship is marked with an 'O'.
     """
+
     for _ in range(5):
-        row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
+        row = random.randint(0, grid_size - 1)
+        col = random.randint(0, grid_size - 1)
         while grid[row][col] == "O":
-            row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
+            row = random.randint(0, grid_size - 1)
+            col = random.randint(0, grid_size - 1)
         grid[row][col] = "O"
 
-def print_grid(grid, hide_ships = False):
+
+def print_grid(grid, hide_ships=False):
     """
-    Sets up a grid and separates the cells with a space
+    Sets up a proper grid from the generated grid (which is a list of lists).
+    Cells are separated with a space.
+    Has a hide_ship condition that hides the ships 'O',
+    by setting them as an empty cell '.'.
+    This condition is set as 'True' for computer's grid.
     """
+
     for row in grid:
         if hide_ships:
-            print(" ".join(["." if cell == "O" else cell for cell in row])) # list comprehension, iterating through each cell and hides ships marked 'O' with '.'
+            # list comprehension
+            # iterating through each cell and hides ships marked 'O' with '.'
+            print(" ".join(["." if cell == "O" else cell for cell in row]))
         else:
-            print(" ".join(row)) # without the join statement to concatanate the elements into a single string (thus also formatting it from a list to a string), the rows will be shown as obvious lists containing string literals
+            # without the join statement to concatanate
+            # the elements into a single string
+            # (thus also formatting it from a list to a string)
+            # the rows will be shown as obvious lists
+            # containing string literals
+            print(" ".join(row))
+
 
 def player_turn(player_grid, computer_grid, grid_size, username):
     """
-    Allows the player to type in a row, then a column
-    Checks if it is a hit or miss on computer's grid
-    Ships marked with 'O' that are hit are marked 'X'
-    Misses are marked with '+'
+    Allows the player to type in a row, then a column.
+    Checks if it is a hit or miss on computer's grid.
+    Ships marked with 'O' that are hit are marked 'X'.
+    Misses are marked with '+'.
     """
+
     while True:
-        player_guess_row = input(colored("Enter row for computer's grid: ", "yellow"))
-        if player_guess_row.isdigit(): # if string is digit, converts to integer
+        player_guess_row = \
+            input(colored("Enter row for computer's grid: ", "yellow"))
+        # if string is digit, converts to integer
+        if player_guess_row.isdigit():
             player_guess_row = int(player_guess_row)
             if valid_coordinate(player_guess_row, 0, grid_size):
                 pass
@@ -98,20 +131,27 @@ def player_turn(player_grid, computer_grid, grid_size, username):
             continue
 
         while True:
-            player_guess_col = input(colored("Enter column for computer's grid: ", "yellow"))
-            if player_guess_col.isdigit(): # if string is digit, converts to integer
+            player_guess_col = \
+                input(colored("Enter column for computer's grid: ", "yellow"))
+            # if string is digit, converts to integer
+            if player_guess_col.isdigit():
                 player_guess_col = int(player_guess_col)
-                if valid_coordinate(player_guess_row, player_guess_col, grid_size): # if col within grid, break child loop
-                    break 
+                # if col within grid, break child loop
+                if valid_coordinate(player_guess_row,
+                   player_guess_col, grid_size):
+                    break
                 else:
-                    print(f"    #Enter valid column number (0 to {grid_size - 1})")
+                    print(f"    #Enter valid column number \
+                    (0 to {grid_size - 1})")
             else:
                 print(f"    #Enter a valid numeric column.")
-        if computer_grid[player_guess_row][player_guess_col] in ["+", "X"]: # checks if coordinate (row and col) has already been used
+        # checks if coordinate (row and col) has already been used
+        if computer_grid[player_guess_row][player_guess_col] in ["+", "X"]:
             print(f"    #Enter an unused coordinate (marked as '.')")
-        else: # if coordinate with '.' selected, break parent loop
+        # if coordinate with '.' selected, break parent loop
+        else:
             break
-    
+
     if computer_grid[player_guess_row][player_guess_col] == "O":
         print(colored(f"{username} hit computer's ship!", "blue"))
         computer_grid[player_guess_row][player_guess_col] = "X"
@@ -121,12 +161,13 @@ def player_turn(player_grid, computer_grid, grid_size, username):
         computer_grid[player_guess_row][player_guess_col] = "+"
         return False
 
+
 def computer_turn(player_grid, computer_grid, grid_size):
     """
-    Allows the computer to select a row, then a column
-    Checks if it is a hit or miss on player's grid
-    Ships marked with 'O' that are hit are marked 'X'
-    Misses are marked with '+'
+    Allows the computer to select a row, then a column.
+    Checks if it is a hit or miss on player's grid.
+    Ships marked with 'O' that are hit are marked 'X'.
+    Misses are marked with '+'.
     """
     while True:
         computer_guess_row = random.randint(0, grid_size - 1)
@@ -135,7 +176,7 @@ def computer_turn(player_grid, computer_grid, grid_size):
         # Validates computer's choice to only target unused coordinates
         if player_grid[computer_guess_row][computer_guess_col] in [".", "O"]:
             break
-    
+
     if player_grid[computer_guess_row][computer_guess_col] == "O":
         print(colored("Computer hit player's ship!", "red"))
         player_grid[computer_guess_row][computer_guess_col] = "X"
@@ -145,13 +186,20 @@ def computer_turn(player_grid, computer_grid, grid_size):
         player_grid[computer_guess_row][computer_guess_col] = "+"
         return False
 
+
 def valid_coordinate(row, col, grid_size):
     """
-    Checks if coordinate is valid on grid
+    Checks if coordinate is valid on grid.
     """
+
     return 0 <= row < grid_size and 0 <= col < grid_size
 
+
 def new_game():
+    """
+    Main game function.
+    """
+
     username = input_username()
     difficulty, grid_size = choose_difficulty()
     rules(difficulty, grid_size)
@@ -168,10 +216,12 @@ def new_game():
     computer_score = 0
 
     while True:
-        print(colored(f"{username}'s grid: ", "blue") + f"score {player_score}")
+        print(colored(f"{username}'s grid: ", "blue") +
+              f"score {player_score}")
         print_grid(player_grid)
         print(colored("Computer grid: ", "red") + f"score {computer_score}")
-        print_grid(computer_grid, hide_ships = True) # computer's ships are hidden
+        # computer's ships are hidden
+        print_grid(computer_grid, hide_ships=True)
 
         if player_ships_remaining == 0:
             print(colored("Computer won the game!", "red"))
@@ -179,7 +229,7 @@ def new_game():
         elif computer_ships_remaining == 0:
             print(colored(f"{username} won the game!", "blue"))
             break
-            
+
         if player_turn(player_grid, computer_grid, grid_size, username):
             computer_ships_remaining -= 1
             player_score += 1
@@ -187,6 +237,7 @@ def new_game():
         if computer_turn(player_grid, computer_grid, grid_size):
             player_ships_remaining -= 1
             computer_score += 1
+
 
 while True:
     new_game()
@@ -204,7 +255,3 @@ while True:
     if restart == "yes":
         continue
     break
-
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
