@@ -133,6 +133,9 @@ The winner is declared once they sink all their opponents ships.
 - Entering 'yes' in 'Play again? (yes/no):' resulted in the same input message being returned, without actually restarting game.
   - Bug was fixed by properly breaking and continuing in correct order inside the while loops.
 
+- If the user and computer sinks each other's last ship at the same turn (thus ending the game), the game tells that the computer is the winner. This shouldn't be the case as it should be a draw.
+  - Bug was easily fixed by placing an if statement at the top of the other winning condition statements: which checks if both the user **and** computer doesn't have any ships left, then 'The game is a draw!'.
+
 ### Unfixed Bugs
 
 - There are no known unfixed bugs.
