@@ -36,7 +36,7 @@ The winner is declared once they sink all their opponents ships.
 
   - The user is prompted to enter their username, which will be displayed in the game.
 
-![Username](documentation/header.jpg)
+![Username](documentation/username.jpg)
 
 - **Difficulty**
 
@@ -45,26 +45,27 @@ The winner is declared once they sink all their opponents ships.
   - Normal creates a 7 by 7 grid (49 cells)
   - Hard creates a 10 by 10 grid (100 cells)
 
-![Difficulty](documentation/colour-customization.jpg)
+![Difficulty](documentation/difficulty.jpg)
 
 - **Ship randomization**
 
   - 5 ships are randomly placed on each corresponding grid once the difficulty (which determines the grid size) has been chosen.
 
-![Ship randomization](documentation/game-options.jpg)
+![Ship randomization](documentation/ship-randomization.jpg)
 
 - **Score**
 
   - Displayed above the grids and to the right of the computer's and user's names. It keeps track of how many ships have been eliminated by each competitor.
 
-![Score](documentation/game-results-start.jpg)
+![Score](documentation/score.jpg)
 
 - **Winner and Restart**
 
   - A winner will be declared at the end of the game.
   - The user can choose whether to restart the game or close it.
 
-![Winner and Restart](documentation/footer.jpg)
+![Winner](documentation/winner.jpg)
+![Restart](documentation/restart.jpg)
 
 ### Features Left to Implement
 
@@ -86,7 +87,7 @@ The winner is declared once they sink all their opponents ships.
 - **Flowchart**
 
   - The initial game page flowchart.
-    ![Flowchart game](wireframes/wireframe-game.png)
+    ![Flowchart game](flowcharts/flowchart.png)
 
 - **Flowchart / End Design Likeness**
 
@@ -120,20 +121,14 @@ The winner is declared once they sink all their opponents ships.
 ### Media
 
 - Tested on Microsoft Edge, Mozilla Firefox and Chrome.
-- Screen media mockup tested on <https://ui.dev/amiresponsive?url=https://masorr.github.io/rock-paper-scissors-lizard-spock/>
-- Tested by changing sizes on browser tabs.
+- Screen media mockup tested on <https://ui.dev/amiresponsive?url=https://battleships-python-game-4a6d011d8d48.herokuapp.com/>
 - Tested on desktop, laptop and mobile.
-
-### Lighthouse Testing
-
-- Game page
-
-  ![Lighthouse game page](documentation/lighthouse-game.jpg)
 
 ### Fixed Bugs
 
 - Failed to upload requirements for heroku. ('pip3 freeze > requirements.txt' in terminal generated requirements that couldn't be deployed)
   - Bug was fixed by removing all generated requirements except 'termcolor==2.3.0' that was installed to display colours in the terminal.
+  - **Reasons**: Root cause stems from the template. The template should've been https://github.com/Code-Institute-Org/p3-template, however the template that was used was https://github.com/Code-Institute-Org/python-essentials-template.
 
 - Entering 'yes' in 'Play again? (yes/no):' resulted in the same input message being returned, without actually restarting game.
   - Bug was fixed by properly breaking and continuing in correct order inside the while loops.
