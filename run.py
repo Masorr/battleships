@@ -223,7 +223,10 @@ def new_game():
         # computer's ships are hidden
         print_grid(computer_grid, hide_ships=True)
 
-        if player_ships_remaining == 0:
+        if player_ships_remaining == 0 and computer_ships_remaining == 0:
+            print(colored(f"The game is a draw!", "yellow"))
+            break
+        elif player_ships_remaining == 0:
             print(colored("Computer won the game!", "red"))
             break
         elif computer_ships_remaining == 0:
