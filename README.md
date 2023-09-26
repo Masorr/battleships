@@ -50,6 +50,7 @@ The winner is declared once they sink all their opponents ships.
 - **Ship randomization**
 
   - 5 ships are randomly placed on each corresponding grid once the difficulty (which determines the grid size) has been chosen.
+  - The ships on computer's grid are hidden from player.
 
 ![Ship randomization](documentation/ship-randomization.jpg)
 
@@ -93,21 +94,22 @@ The winner is declared once they sink all their opponents ships.
 
   - Game page
 
-    - 'You won!' div does not have a border or styling as could be suggested by the wireframe.
-    - Buttons have consistent spacing between each other. They don't change based on screen media.
-      - **Reasons**: Didn't feel like they were necessary. Keeping it simple. Better design.
+    - Flowchart contain the basic ideas of the game.
+    - Flowchart are missing 'restart game' and 'close game' functions. Flowchart is missing winning conditions.
+      - **Reasons**: Coding for the Python game began when sufficient basics in the flowchart were established.
 
 - **Colours**
 
-  - There are 3 colours in the game. The user is presented with blue colour while the computer is presented with red. The input for typing in coordinates for the user is marked with yellow text.
-  - Texts marked with colours are: competitors' names above their grids, messages when hitting enemy ships (example, 'Computer hit player's ship!' is marked with red), when winning a game (example '(Username) won the game!' is marked with blue) and when typing in coordinates for user (yellow).
+  - There are 3 colours in the game. The user is presented with blue colour while the computer is presented with red. The input for typing in coordinates for the user is marked with yellow text. If the game turns out to be a draw, this text will also be in yellow colour.
+  - Texts marked with colours are: competitors' names above their grids, messages when hitting enemy ships (example: 'Computer hit player's ship!' is marked with red), when winning a game (example: '(Username) won the game!' is marked with blue), if the game becomes a draw (marked with yellow), and when typing in coordinates for user (yellow).
     - **Reasons**: Better UX. Makes the game more visually pleasing and easier to distinguish between user and computer. It also clarifies the 'action' inputs by the user. 
 
 ## Testing
 
 ### Manual Testing
 
-![Testing](documentation/tests.png)
+![Testing-1](documentation/tests-1.png)
+![Testing-2](documentation/tests-2.png)
 
 ### Validator Testing
 
@@ -116,7 +118,7 @@ The winner is declared once they sink all their opponents ships.
 
 - PEP8 validator result for run.py
 
-  ![PEP8 validation](documentation/validate-html.jpg)
+  ![PEP8 validation](documentation/validate-python.jpg)
 
 ### Media
 
@@ -164,6 +166,10 @@ Link to live site - <https://battleships-python-game-4a6d011d8d48.herokuapp.com/
 ### Content
 
 - Python structuring and understanding of concepts was made with the help by the course material from Code Institute and was heavily inspired by the ULTIMATE Battleships project.
+- Print statement for several rows comes from https://stackoverflow.com/questions/34980251/how-to-print-multiple-lines-of-text-with-python
+- Term color comes from https://www.studytonight.com/python-howtos/how-to-print-colored-text-in-python
+- Idea for making a list of lists with list comprehension for eventually making grids comes from https://stackoverflow.com/questions/21507319/list-comprehension-list-of-lists
+- Idea for hiding ships comes from https://stackoverflow.com/questions/70220471/how-to-hide-value-in-array-for-battleship-game
 
 ## Thanks
 
