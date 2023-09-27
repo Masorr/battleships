@@ -142,7 +142,7 @@ def player_turn(player_grid, computer_grid, grid_size, username):
                     break
                 else:
                     print(f"    #Enter valid column number \
-                    (0 to {grid_size - 1})")
+(0 to {grid_size - 1})")
             else:
                 print(f"    #Enter a valid numeric column.")
         # checks if coordinate (row and col) has already been used
